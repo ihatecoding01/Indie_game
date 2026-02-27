@@ -1,21 +1,18 @@
-# game design doc
+# to do list
 
-## Objective
-- game type: isometric rpg
-- art style: pixelated
-- Game map: free world
+- [ ] Overworld
+    - [ ] terrain - flat
+    - [ ] trees
+    - [ ] Bushes
+    - [ ] rocks    
+- [ ] Player character
+    - [ ] draw character on screen
+    - [ ] point and click controls
+    - [ ] navigation (ignore obstacles)
+        - [ ] A * algorithm
+    - [ ] improved navigation (obstacle avoidance)
+- [ ] enemies
+    - [ ] draw enemies on screen
+    - [ ] patrol 
+- [ ] Combat
 
-## features
-- world building
-- boss to beat
-- enemies and friends
-- inventory/loot
-- farming
-- quests
-- NPCs
-- character stats
-
-## development
-- start simple
-- build layer by layer
-- focus on features, graphics and polish and customizations come later

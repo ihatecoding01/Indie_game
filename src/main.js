@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/addons/libs/stats.module.js'
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { Terrain } from './terrain';
 
 const gui = new GUI();
 
@@ -15,6 +16,9 @@ const controls = new OrbitControls( camera, renderer.domElement );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+
+const terrain = new Terrain(10, 10);
+scene.add(terrain);
 
 const lamp = new THREE.DirectionalLight();
 lamp.position.set(1, 2, 3);
@@ -44,7 +48,7 @@ function animate( time ) {
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 const folder = gui.addFolder('Cube')
