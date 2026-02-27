@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/addons/libs/stats.module.js' // adds a FPS counter and other features
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js'; //lets you control without a mouse
 // imported Terrain function from terrain.js
-import { Terrain } from './terrain';
+import { Terrain } from './terrain.js';
 
 const gui = new GUI();
 
@@ -19,7 +19,7 @@ document.body.appendChild( renderer.domElement );
 const terrain = new Terrain(10, 10); //sets up a terrain of 10 by 10 from the function we imported earlier
 scene.add(terrain);
 
-const lamp = new THREE.DirectionalLight(); // the lighting setup 
+const lamp = new THREE.DirectionalLight(0xFFFFFF, 2); // the lighting setup 
 lamp.position.set(1, 2, 3);
 scene.add(lamp);
 
@@ -29,15 +29,12 @@ scene.add(ambient);
 
 const stats = new Stats(); //adds the stats functionality we imported earlier
 document.body.appendChild(stats.dom)
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshStandardMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+
 
 camera.position.z = 5;
 controls.update();
 
-// the main function that does the rendering of the cube
+// the main function that does the rendering of the terrain
 function animate( time ) { 
     controls.update();
     stats.update();
@@ -52,5 +49,10 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-const folder = gui.addFolder('Cube')
-folder.add(cube.position, 'x', -2, 2, 0.1).name('X position');
+const terrianFolder = gui.addFolder('terrain');
+terrianFolder.add(terrain, 'width', 1, 20 , 1).name('Width');
+terrianFolder.add(terrain, 'height', 1, 20, 1).name('Height');
+terrianFolder.addColor(terrain.material, 'color').name('Color');
+terrianFolder.onChange (() => {
+    terrain.createGeometry();
+});
